@@ -1,0 +1,8 @@
+{% extends "./dashboard.html" %}
+{% load static %}
+{% block main_content %}
+    <h2 class="mt-4">차트 시각화</h2>
+    <div>
+    <img src="{% static chart_path %}" alt="bar chart" style="width:100%; height:auto;">
+    </div>
+{% endblock %}

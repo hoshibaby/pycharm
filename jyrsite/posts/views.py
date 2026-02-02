@@ -4,8 +4,9 @@ from django.contrib import messages
 from posts.forms import PostCreateForm, PostUpdateForm
 from posts.models import Post
 
-
 # Create your views here.
+
+#게시글 등록
 def create_post(request):
     form = PostCreateForm()
     if request.method == 'POST':
@@ -19,13 +20,13 @@ def create_post(request):
             messages.error(request,'게시글 등록 실패')
     return  render(request, 'posts/create.html', {'form': form})
 
-    # return HttpResponse('게시글 등록')
+#게시글 보기
 def get_post(request, post_id):
-    # post = Post.objects.get(id=post_id)
     post = get_object_or_404(Post, id=post_id)
     return render(request, 'posts/read.html', {'post': post})
     # return HttpResponse('게시글 보기')
 
+#게시글 수정
 def update_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     form = PostUpdateForm(instance=post)
@@ -39,8 +40,9 @@ def update_post(request, post_id):
         else:
             messages.error(request, "비밀번호 불일치")
     return render(request, 'posts/update.html',{'form': form})
-
     # return HttpResponse('게시글 수정')
+
+#게시글 삭제
 def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     password = request.POST.get('password')
@@ -53,9 +55,12 @@ def delete_post(request, post_id):
         else:
             messages.error(request,"비밀번호 불일치")
             return redirect("posts:read",post_id=post.id)
-            # return HttpResponse('게시글 삭제')
+             # return HttpResponse('게시글 삭제')
 
+#게시글 목록
 def get_posts(request):
     posts = Post.objects.all().order_by('-id')
     return render(request, 'posts/list.html', {'posts': posts})
     # return HttpResponse('게시글 목록')
+
+

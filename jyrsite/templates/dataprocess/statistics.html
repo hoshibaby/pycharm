@@ -1,0 +1,100 @@
+{% extends "./dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+<!-- 페이지 헤더 -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-2 mb-4 border-bottom">
+    <h1 class="h2">통계분석(상관관계분석, Heatmap)</h1>
+</div>
+
+<!-- 요약 카드 -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title text-muted">평균 행복 지수</h6>
+                <h3>{{ avg_happiness }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title text-muted">건강과 행복지수 상관관계</h6>
+                <h3>{{ corr_happy_health }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title text-muted">재정과 행복지수 상관관계</h6>
+                <h3 class="text-danger">{{ corr_happy_financial }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title text-muted">업데이트 날짜</h6>
+                <h5>2025-12-29</h5>
+            </div>
+        </div>
+    </div>
+</div>
+{#    <div class="col-md-3">#}
+{#        <div class="card shadow-sm">#}
+{#            <div class="card-body">#}
+{#                <h6 class="card-title text-muted">업데이트 날짜</h6>#}
+{#                <h5>2025-12-25</h5>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                상관계수 테이블
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-sm text-center align-middle mb-0">
+                    <tbody>
+                      {% for row in corr_matrix %}
+                        <tr>
+                          {% for v in row %}
+                            <td>{{ v }}</td>
+                          {% endfor %}
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                상관관계 Heatmap
+            </div>
+            <div class="card-body">
+               <img src="{% static 'images/heatmap.png' %}"
+                alt="heatmap"
+                style="width:100%; height:auto;">
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+{% endblock %}

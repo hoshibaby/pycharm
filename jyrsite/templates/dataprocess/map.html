@@ -1,0 +1,8 @@
+{% extends "./dashboard.html" %}
+{% load static %}
+
+{% block main_content %}
+    <h2 class="mt-4">맵 시각화</h2>
+    <iframe src="{% static 'maps/map.html' %}" style="width:100%; height:600px;"></iframe>
+{% endblock %}
+
